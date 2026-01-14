@@ -15,16 +15,16 @@ show_hidden = true
 show_symlink = true
 # Scrolloff (marge avant de scroller)
 scrolloff = 5
-# Wrapping de la sélection
+# Mode d'affichage de la ligne (taille, permissions, date, etc.)
 linemode = "size"
 
 [preview]
-# Taille max des fichiers à prévisualiser (en bytes)
+# Taille max de la zone de prévisualisation
 tab_size = 2
 max_width = 600
 max_height = 900
 # Cache
-cache_dir = ""
+cache_dir = "~/.cache/yazi"
 # Preview d'images
 image_filter = "lanczos3"
 image_quality = 80
@@ -60,8 +60,6 @@ archive = [
 [open]
 # Règles d'ouverture par type de fichier
 rules = [
-	{ name = "*/", use = "edit" },
-	
 	# Texte
 	{ mime = "text/*", use = "edit" },
 	{ mime = "application/json", use = "edit" },
