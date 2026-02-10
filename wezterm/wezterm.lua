@@ -1,22 +1,22 @@
--- Streamlined WezTerm configuration - maintains all functionality
+-- WezTerm configuration - Gruvbox Dark theme
 local wezterm = require "wezterm"
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- GitHub Dark color palette
+-- Gruvbox Dark color palette
 local colors = {
-    fg = "#d0d7de",
-    bg = "#0d1117",
-    comment = "#8b949e",
-    red = "#ff7b72",
-    green = "#3fb950",
-    yellow = "#d29922",
-    blue = "#539bf5",
-    magenta = "#bc8cff",
-    cyan = "#39c5cf",
-    selection = "#415555",
-    caret = "#58a6ff",
-    invisibles = "#2f363d"
+    bg = "#282828",
+    fg = "#ebdbb2",
+    comment = "#928374",
+    red = "#fb4934",
+    green = "#b8bb26",
+    yellow = "#fabd2f",
+    blue = "#83a598",
+    magenta = "#d3869b",
+    cyan = "#8ec07c",
+    selection = "#3c3836",
+    caret = "#fe8019",
+    invisibles = "#3c3836"
 }
 
 -- Keybindings
@@ -85,7 +85,7 @@ config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 config.hide_tab_bar_if_only_one_tab = true
 
--- Color scheme
+-- Color scheme (Gruvbox Dark)
 config.colors = {
     foreground = colors.fg,
     background = colors.bg,
@@ -96,18 +96,34 @@ config.colors = {
     selection_bg = colors.selection,
     scrollbar_thumb = colors.invisibles,
     split = colors.invisibles,
-    ansi = { colors.invisibles, colors.red, colors.green, colors.yellow,
-        colors.blue, colors.magenta, colors.cyan, colors.fg },
-    brights = { colors.comment, "#ff9790", "#6af28c", "#e3b341",
-        "#79c0ff", "#d2a8ff", "#56d4dd", "#ffffff" },
+    ansi = {
+        colors.invisibles, -- black
+        colors.red,
+        colors.green,
+        colors.yellow,
+        colors.blue,
+        colors.magenta,
+        colors.cyan,
+        colors.fg,         -- white
+    },
+    brights = {
+        "#504945", -- bright black
+        "#fb4934", -- bright red
+        "#b8bb26", -- bright green
+        "#fabd2f", -- bright yellow
+        "#83a598", -- bright blue
+        "#d3869b", -- bright magenta
+        "#8ec07c", -- bright cyan
+        "#fbf1c7", -- bright white
+    },
     tab_bar = {
         background = colors.bg,
         inactive_tab_edge = colors.invisibles,
         active_tab = { bg_color = colors.blue, fg_color = colors.bg, intensity = "Bold" },
         inactive_tab = { bg_color = colors.bg, fg_color = colors.comment },
-        inactive_tab_hover = { bg_color = "#21262d", fg_color = colors.caret },
+        inactive_tab_hover = { bg_color = "#3c3836", fg_color = colors.caret },
         new_tab = { bg_color = colors.bg, fg_color = colors.caret, intensity = "Bold" },
-        new_tab_hover = { bg_color = "#21262d", fg_color = colors.red }
+        new_tab_hover = { bg_color = "#3c3836", fg_color = colors.red }
     }
 }
 
