@@ -5,39 +5,31 @@
 # Ratio des colonnes (parent:current:preview)
 ratio = [1, 4, 3]
 # Trier par (modified, created, extension, alphabetical, natural, size)
-sort_by = "natural"
+sort_by = "alphabetical"
 sort_sensitive = false
 sort_reverse = false
 sort_dir_first = true
-# Toujours afficher les fichiers cachés
-show_hidden = true
-# Symlinks
+sort_translit  = false
+show_hidden = false
 show_symlink = true
-# Scrolloff (marge avant de scroller)
 scrolloff = 5
-# Mode d'affichage de la ligne (taille, permissions, date, etc.)
 linemode = "size"
-# Support de la souris
-mouse_events = ["click", "scroll"]
-# Format du titre de la fenêtre
+mouse_events = [ "click", "scroll" ]
 title_format = "Yazi: {cwd}"
 
 [preview]
-# Taille max de la zone de prévisualisation
+wrap = "no"
 tab_size = 2
 max_width = 600
 max_height = 900
-# Cache (vide = utilise le cache système, recommandé)
 cache_dir = ""
-# Délai avant l'envoi des données d'aperçu (réduit le lag)
 image_delay = 30
-# Preview d'images
-image_filter = "lanczos3"
-# Qualité optimisée (75-80 recommandé pour meilleur compromis perf/qualité)
+image_filter = "triangle"
 image_quality = 75
+ueberzug_scale  = 1
+ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
-# Éditeur de texte
 edit = [
 	{ run = '$EDITOR "$@"', block = true, desc = "Éditeur par défaut" },
 	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
@@ -91,10 +83,12 @@ markdown = [
 ]
 
 [open]
-# Règles d'ouverture par type de fichier
 rules = [
+    # Folder
+    { name = "*/", use = [ "edit", "open", "reveal" ] },
+
 	# Texte
-	{ mime = "text/*", use = "edit" },
+	{ mime = "text/*", use = [ "edit", "reveal" ] },
 	{ mime = "application/json", use = "edit" },
 	{ mime = "application/javascript", use = "edit" },
 	{ mime = "application/x-shellscript", use = "edit" },
@@ -103,33 +97,47 @@ rules = [
 	{ name = "*.md", use = "markdown" },
 
 	# Images
-	{ mime = "image/*", use = "image" },
+	{ mime = "image/*", use = [ "image", "reveal" ] },
 
 	# Vidéos
-	{ mime = "video/*", use = "video" },
+	{ mime = "video/*", use = [ "play", "reveal" ] },
 
 	# Audio
-	{ mime = "audio/*", use = "audio" },
+	{ mime = "audio/*", use = [ "play", "reveal" ] },
 
 	# PDF
-	{ mime = "application/pdf", use = "pdf" },
+	{ mime = "application/pdf", use = [ "pdf", "reveal" ] },
 
 	# Archives
-	{ mime = "application/*zip", use = "extract" },
-	{ mime = "application/x-tar", use = "extract" },
-	{ mime = "application/x-bzip2", use = "extract" },
-	{ mime = "application/x-7z-compressed", use = "extract" },
-	{ mime = "application/x-rar", use = "extract" },
-	{ mime = "application/gzip", use = "extract" },
+	{ mime = "application/zip", use = [ "extract", "reveal" ] },
+	{ mime = "application/rar", use = [ "extract", "reveal" ] },
+	{ mime = "application/7z*", use = [ "extract", "reveal" ] },
+	{ mime = "application/tar", use = [ "extract", "reveal" ] },
+	{ mime = "application/gzip", use = [ "extract", "reveal" ] },
+	{ mime = "application/xz", use = [ "extract", "reveal" ] },
+	{ mime = "application/zstd", use = [ "extract", "reveal" ] },
+	{ mime = "application/bzip*", use = [ "extract", "reveal" ] },
+	{ mime = "application/lzma", use = [ "extract", "reveal" ] },
+	{ mime = "application/compress", use = [ "extract", "reveal" ] },
+	{ mime = "application/archive", use = [ "extract", "reveal" ] },
+	{ mime = "application/cpio", use = [ "extract", "reveal" ] },
+	{ mime = "application/arj", use = [ "extract", "reveal" ] },
+	{ mime = "application/xar", use = [ "extract", "reveal" ] },
+	{ mime = "application/ms-cab*", use = [ "extract", "reveal" ] },
+
+	# Empty file
+	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 
 	# Fallback
-	{ mime = "*", use = "open" },
+	{ mime = "*", use = [ "open", "reveal" ] },
 ]
 
 [tasks]
 micro_workers = 5
 macro_workers = 10
-bizarre_retry = 5
+bizarre_retry = 3
+image_alloc      = 536870912  # 512MB
+image_bound      = [ 10000, 10000 ]
 suppress_preload = false
 
 [plugin]
@@ -171,7 +179,6 @@ previewers = [
 ]
 
 [input]
-# Curseur
 cursor_blink = true
 
 [select]
@@ -179,9 +186,67 @@ cursor_blink = true
 open_title = "Ouvrir avec:"
 open_origin = "bottom-left"
 
+[pick]
+# cd
+cd_title  = "Change directory:"
+cd_origin = "top-center"
+cd_offset = [ 0, 2, 50, 3 ]
+
+# create
+create_title  = [ "Create:", "Create (dir):" ]
+create_origin = "top-center"
+create_offset = [ 0, 2, 50, 3 ]
+
+# rename
+rename_title  = "Rename:"
+rename_origin = "hovered"
+rename_offset = [ 0, 1, 50, 3 ]
+
+# filter
+filter_title  = "Filter:"
+filter_origin = "top-center"
+filter_offset = [ 0, 2, 50, 3 ]
+
+# find
+find_title  = [ "Find next:", "Find previous:" ]
+find_origin = "top-center"
+find_offset = [ 0, 2, 50, 3 ]
+
+# search
+search_title  = "Search via {n}:"
+search_origin = "top-center"
+search_offset = [ 0, 2, 50, 3 ]
+
+# shell
+shell_title  = [ "Shell:", "Shell (block):" ]
+shell_origin = "top-center"
+shell_offset = [ 0, 2, 50, 3 ]
+
+[confirm]
+# trash
+trash_title 	= "Trash {n} selected file{s}?"
+trash_origin	= "center"
+trash_offset	= [ 0, 0, 70, 20 ]
+
+# delete
+delete_title 	= "Permanently delete {n} selected file{s}?"
+delete_origin	= "center"
+delete_offset	= [ 0, 0, 70, 20 ]
+
+# overwrite
+overwrite_title   = "Overwrite file?"
+overwrite_content = "Will overwrite the following file:"
+overwrite_origin  = "center"
+overwrite_offset  = [ 0, 0, 50, 15 ]
+
+# quit
+quit_title   = "Quit?"
+quit_content = "The following tasks are still running, are you sure you want to quit?"
+quit_origin  = "center"
+quit_offset  = [ 0, 0, 50, 15 ]
+
 [which]
-# Menu d'aide des raccourcis
-sort_by = "key"
+sort_by = "none"
 sort_sensitive = false
 sort_reverse = false
 sort_translit = false
