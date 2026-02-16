@@ -12,21 +12,21 @@
   "agent": {
     "default_profile": "ask",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
-    }
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest",
+    },
   },
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "base_keymap": "VSCode",
   "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "buffer_font_size": 16.0,
   "theme": {
-    "mode": "system",
-    "light": "Gruvbox-light",
-    "dark": "Gruvbox"
+    "mode": "dark",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark",
   },
   "minimap": {
     "show": "always",
@@ -34,6 +34,6 @@
     "thumb": "always",
     "thumb_border": "left_open",
     "current_line_highlight": "line",
-    "max_width_columns": 140
-  }
+    "max_width_columns": 140,
+  },
 }
