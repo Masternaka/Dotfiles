@@ -37,6 +37,8 @@ Le thème `gruvbox-dark` est basé sur la palette de couleurs Gruvbox classique,
 - `window-theme = ghostty` - Thème natif Ghostty
 - `window-padding-x/y = 14` - Marges confortables
 - `resize-overlay = never` - Pas d'overlay lors du redimensionnement
+- `confirm-close-surface = false` - Ne demande pas de confirmation à la fermeture
+- `gtk-toolbar-style = flat` - Barre d’outils plate et minimaliste
 
 ### Curseur
 - `cursor-style = "block"` - Curseur bloc classique
@@ -47,10 +49,11 @@ Le thème `gruvbox-dark` est basé sur la palette de couleurs Gruvbox classique,
 - `adjust-font-baseline = 1` - Alignement parfait de la police
 - `adjust-underline-position = -1` - Positionnement des soulignements
 
-### Presse-papiers
+### Presse-papiers & souris
 - `clipboard-read/write = yes` - Accès complet au presse-papiers
 - `select-to-clipboard = yes` - Sélection automatique vers le presse-papiers
 - `mouse-hide-while-typing = yes` - Cache le curseur pendant la saisie
+- `mouse-scroll-multiplier = 0.95` - Défilement légèrement ralenti pour plus de précision
 
 ### Shell Integration
 - `shell-integration = detect` - Détection automatique du shell
@@ -60,6 +63,7 @@ Le thème `gruvbox-dark` est basé sur la palette de couleurs Gruvbox classique,
 - `quit-after-last-window-closed = yes` - Fermeture automatique
 - `working-directory = inherit` - Hérite du répertoire courant
 - `auto-window = true` - Gestion automatique des fenêtres
+- `copy-on-select = no` - Ne copie pas automatiquement la sélection
 
 ## ⌨️ Raccourcis clavier
 
@@ -134,4 +138,4 @@ Commenter les lignes non désirées avec `#` :
 
 ---
 
-**Dernière mise à jour**: 2026-02-11
+**Dernière mise à jour**: 2026-02-16

@@ -1,228 +1,381 @@
-# Gruvbox — Yazi Flavors (Dark + Light)
+# Configuration Yazi
 
-Thèmes Gruvbox complets pour [Yazi](https://yazi-rs.github.io/), le file manager
-terminal en Rust. Inclut les deux variantes Dark et Light avec coloration syntaxique
-pour les previews de code.
+Configuration complète de **Yazi**, un gestionnaire de fichiers terminal moderne et performant écrit en Rust.
 
----
-
-## Structure des fichiers
+## 📁 Structure
 
 ```
-yazi-gruvbox/
-│
-├── README.md                         ← ce fichier
-├── theme.toml                        → copier dans ~/.config/yazi/
-│
-├── gruvbox-dark.yazi/                → copier dans ~/.config/yazi/flavors/
-│   ├── flavor.toml                   (styles de l'interface)
-│   └── tmtheme.xml                   (coloration syntaxique des previews)
-│
-└── gruvbox-light.yazi/               → copier dans ~/.config/yazi/flavors/
-    ├── flavor.toml
-    └── tmtheme.xml
+yazi/
+└── .config/
+    └── yazi/
+        ├── yazi.toml              # Configuration principale
+        ├── keymap.toml            # Raccourcis clavier personnalisés
+        ├── theme.toml             # Activation des thèmes (flavors)
+        └── flavors/               # Thèmes Gruvbox
+            ├── gruvbox-dark.yazi/
+            │   ├── flavor.toml
+            │   └── tmtheme.xml
+            └── gruvbox-light.yazi/
+                ├── flavor.toml
+                └── tmtheme.xml
 ```
 
-Et ce que ça donne dans ta config finale :
+## ⚙️ Configuration principale (`yazi.toml`)
 
-```
-~/.config/yazi/
-│
-├── theme.toml          ← active les flavors (dark/light automatique)
-├── keymap.toml         (ta config de touches, non fourni ici)
-├── yazi.toml           (ta config générale, non fourni ici)
-│
-└── flavors/
-    ├── gruvbox-dark.yazi/
-    │   ├── flavor.toml
-    │   └── tmtheme.xml
-    └── gruvbox-light.yazi/
-        ├── flavor.toml
-        └── tmtheme.xml
-```
+### Gestionnaire de fichiers (`[manager]`)
+- **Ratio des colonnes** : `[1, 4, 3]` (parent:current:preview)
+- **Tri par défaut** : Alphabétique
+- **Tri sensible à la casse** : Désactivé
+- **Tri inversé** : Désactivé
+- **Dossiers en premier** : Activé
+- **Fichiers cachés** : Masqués par défaut (`show_hidden = false`)
+- **Liens symboliques** : Affichés
+- **Défilement** : Offset de 5 lignes (`scrolloff = 5`)
+- **Mode de ligne** : Taille (`linemode = "size"`)
+- **Événements souris** : Clic et défilement activés
+- **Format du titre** : `Yazi: {cwd}`
 
----
+### Prévisualisation (`[preview]`)
+- **Retour à la ligne** : Désactivé (`wrap = "no"`)
+- **Taille de tabulation** : 2 espaces
+- **Dimensions maximales** : 600x900 pixels
+- **Cache** : Désactivé (répertoire vide)
+- **Délai d'affichage des images** : 30ms
+- **Filtre d'image** : Triangle (qualité optimale)
+- **Qualité d'image** : 75%
+- **Ueberzug** : Scale 1, offset [0, 0, 0, 0]
 
-## Installation
+### Ouverture de fichiers (`[opener]`)
 
-### Option A — À la main (recommandé)
+#### Éditeurs
+- Éditeur par défaut (`$EDITOR`)
+- Neovim (`nvim`)
+- Vim (`vim`)
+- Nano (`nano`)
 
-```bash
-# 1. Créer le dossier flavors s'il n'existe pas
-mkdir -p ~/.config/yazi/flavors
+#### Applications génériques
+- `xdg-open` pour les fichiers génériques
 
-# 2. Copier les deux flavors
-cp -r gruvbox-dark.yazi  ~/.config/yazi/flavors/
-cp -r gruvbox-light.yazi ~/.config/yazi/flavors/
+#### Médias
+- **Vidéo** : MPV, VLC
+- **Images** : Feh, sxiv, imv, Eye of GNOME
+- **PDF** : Zathura, Evince, Okular
+- **Audio** : MPV, Rhythmbox
 
-# 3. Activer les thèmes
-#    Si tu n'as pas encore de theme.toml :
-cp theme.toml ~/.config/yazi/theme.toml
+#### Documents
+- **Markdown** : Glow (avec prévisualisation), éditeur
 
-#    Si tu as déjà un theme.toml, ajoute simplement ces lignes :
-#    [flavor]
-#    dark  = "gruvbox-dark"
-#    light = "gruvbox-light"
-```
+#### Archives
+- **Extraction** : unar, 7zip, tar
+- Support de nombreux formats : zip, rar, 7z, tar, gzip, xz, zstd, bzip2, lzma, compress, archive, cpio, arj, xar, ms-cab
 
-### Option B — Avec un script
+### Règles d'ouverture (`[open]`)
+- **Dossiers** : Édition, ouverture, révélation
+- **Texte** : Édition automatique (text/*, JSON, JavaScript, shell scripts)
+- **Markdown** : Prévisualisation avec Glow
+- **Images** : Visualisation avec applications configurées
+- **Vidéos/Audio** : Lecture avec lecteurs multimédias
+- **PDF** : Ouverture avec lecteurs PDF
+- **Archives** : Extraction automatique
+- **Fichiers vides** : Édition
+- **Fallback** : Ouverture générique
 
-```bash
-#!/usr/bin/env bash
-YAZI_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/yazi"
-mkdir -p "$YAZI_DIR/flavors"
+### Tâches (`[tasks]`)
+- **Workers micro** : 5
+- **Workers macro** : 10
+- **Tentatives bizarres** : 3
+- **Allocation mémoire images** : 512MB
+- **Limite d'image** : 10000x10000 pixels
+- **Suppression du préchargement** : Désactivé
 
-cp -r gruvbox-dark.yazi  "$YAZI_DIR/flavors/"
-cp -r gruvbox-light.yazi "$YAZI_DIR/flavors/"
+### Plugins (`[plugin]`)
 
-# Injecte [flavor] dans theme.toml existant, ou le crée
-if grep -q '\[flavor\]' "$YAZI_DIR/theme.toml" 2>/dev/null; then
-  echo "⚠️  [flavor] déjà présent dans theme.toml — édite-le manuellement."
-else
-  cat >> "$YAZI_DIR/theme.toml" <<'EOF'
+#### Préchargeurs
+- Détection automatique du type MIME pour tous les fichiers
 
-[flavor]
-dark  = "gruvbox-dark"
-light = "gruvbox-light"
-EOF
-  echo "✅  theme.toml mis à jour."
-fi
-```
+#### Prévisualiseurs
+- **Dossiers** : Prévisualisation de structure
+- **Code** : Coloration syntaxique (text/*, XML, JavaScript)
+- **JSON** : Formatage JSON
+- **CSV** : Affichage formaté
+- **Markdown** : Rendu avec Glow
+- **Médias** : Images, vidéos, audio
+- **PDF** : Prévisualisation PDF
+- **Archives** : Liste du contenu (zip, tar, bzip2, 7z, rar, gzip)
 
----
+### Interface (`[input]`, `[select]`, `[pick]`, `[confirm]`)
+- **Curseur clignotant** : Activé dans les champs de saisie
+- **Menus personnalisés** : Positions et tailles configurées pour tous les dialogues
+- **Confirmations** : Messages personnalisés pour corbeille, suppression, écrasement, quitter
 
-## Fonctionnement dark/light automatique
+### Logs (`[log]`)
+- **Logs activés** : Désactivé (`enabled = false`)
 
-Yazi détecte le mode sombre/clair du terminal via deux mécanismes :
+## ⌨️ Raccourcis clavier (`keymap.toml`)
 
-1. **`$COLORFGBG`** — variable d'environnement définie par certains terminaux
-   (Kitty, Alacritty, WezTerm). Format : `"foreground;background"` où le fond
-   < 8 = dark, ≥ 8 = light.
+### Navigation de base
+- `h/j/k/l` - Navigation vim (gauche/bas/haut/droite)
+- `H/J/K/L` - Navigation rapide (5 lignes)
+- `gg/G` - Aller en haut/bas de la liste
+- `<C-u>/<C-d>` - Page précédente/suivante (50%)
+- `<C-b>/<C-f>` - Page complète haut/bas
+- `<PageUp>/<PageDown>` - Navigation par pages
+- `<Left>/<Right>` - Retour/entrée dans dossier
+- `<Right>` (smart) - Smart enter avec plugin
 
-2. **OSC 11** — requête de couleur de fond terminal (méthode moderne, fonctionne
-   avec la plupart des terminaux récents).
+### Sélection
+- `<Space>` - Toggle sélection + descendre
+- `v` - Mode visuel
+- `V` - Quitter mode visuel
+- `<C-a>` - Tout sélectionner
+- `<C-r>` - Tout désélectionner
 
-Si ton terminal ne supporte ni l'un ni l'autre, Yazi utilise `dark` par défaut.
-Tu peux forcer un mode en mettant la même valeur pour `dark` et `light`.
+### Opérations sur fichiers
+- `o` - Ouvrir
+- `O` - Ouvrir avec... (interactif)
+- `<Enter>` - Ouvrir
+- `y` - Copier
+- `x` - Couper
+- `p` - Coller
+- `P` - Coller (écraser)
+- `d` - Supprimer (corbeille)
+- `D` - Supprimer définitivement
+- `a` - Créer fichier/dossier
+- `r` - Renommer
+- `R` - Renommage en masse (bulk-rename)
+- `C` - Compresser sélection
 
----
+### Recherche et filtrage
+- `/` - Rechercher (smart)
+- `?` - Rechercher précédent (smart)
+- `n/N` - Résultat suivant/précédent
+- `f` - Filtrer (smart)
+- `F` - Rechercher récursif
+- `S` - Recherche fd
+- `sr` - Recherche ripgrep
 
-## Personnaliser sans toucher aux flavors
+### Tri
+- `sm` - Trier par date de modification
+- `sc` - Trier par date de création
+- `se` - Trier par extension
+- `sa` - Trier alphabétique
+- `sn` - Trier naturel
+- `ss` - Trier par taille
 
-Le `theme.toml` peut **surcharger** n'importe quelle valeur d'un flavor.
-Les overrides se placent **en dehors** de la section `[flavor]` :
+### Navigation rapide (goto)
+- `gh` - Aller au home (`~`)
+- `gc` - Aller à `.config`
+- `gd` - Aller à `~/Downloads`
+- `gD` - Aller à `~/Documents`
+- `gt` - Aller à `/tmp`
+- `gr` - Aller à `/` (racine)
+- `g<Space>` - cd interactif
+- `g.` - Aller au dossier précédent
+- `gp` - Aller à `~/Projects`
+- `gw` - Aller à `~/Workspace`
+- `zz` - Zoxide jump (si plugin installé)
+- `m` - Sauver marque-page
+- `'` - Aller au marque-page
 
-```toml
-# ~/.config/yazi/theme.toml
+### Onglets
+- `t` - Nouvel onglet
+- `<C-w>` / `<C-q>` - Fermer onglet
+- `1-9` - Aller à l'onglet 1-9
+- `[` / `]` - Onglet précédent/suivant
+- `<C-Left>` / `<C-Right>` - Onglet précédent/suivant
+- `{` / `}` - Déplacer onglet gauche/droite
 
-[flavor]
-dark  = "gruvbox-dark"
-light = "gruvbox-light"
+### Affichage
+- `zh` - Toggle fichiers cachés
+- `zs` - Mode ligne : taille
+- `zp` - Mode ligne : permissions
+- `zm` - Mode ligne : date modif
+- `zP` - Maximiser preview
 
-# ── Surcharges personnelles ────────────────────────────────────────────────
-# Exemple : changer la couleur du CWD
-[manager]
-cwd = { fg = "#fabd2f", bold = true }
+### Copier chemin
+- `cc` - Copier chemin complet
+- `cd` - Copier nom dossier
+- `cf` - Copier nom fichier
+- `cn` - Copier nom sans extension
+- `cw` - Copier chemin:ligne
 
-# Exemple : changer les bordures
-[manager]
-border_style = { fg = "#928374" }
+### Terminal et outils
+- `T` - Ouvrir kitty dans le dossier courant
+- `;` - Exécuter commande shell
+- `:` - Exécuter shell (bloquant)
+- `w` - Afficher tâches
 
-# Exemple : forcer des permissions en italic
-[status]
-permissions_x = { fg = "#b8bb26", italic = true }
-```
+### Aide et quitter
+- `~` / `?` - Aide
+- `q` - Quitter
+- `Q` - Quitter sans cd
+- `<Esc>` / `<C-c>` - Échap / Annuler
 
-> Les overrides dans `theme.toml` ont priorité sur le `flavor.toml`.
-> Le flavor n'est jamais modifié, ce qui facilite les mises à jour.
+### Raccourcis dans les menus
+- **Tasks** : Navigation vim, inspection, annulation
+- **Select** : Navigation vim, validation
+- **Input** : Navigation Emacs, historique, suppression
+- **Completion** : Navigation vim, validation
+- **Help** : Navigation vim, pages
 
----
+## 🎨 Thèmes (Flavors)
 
-## Palette de couleurs
+### Activation (`theme.toml`)
+- **Thème sombre** : `gruvbox-dark` (détection automatique)
+- **Thème clair** : `gruvbox-light` (détection automatique)
+
+### Détection automatique dark/light
+Yazi détecte le mode sombre/clair du terminal via :
+1. **`$COLORFGBG`** - Variable d'environnement (Kitty, Alacritty, WezTerm)
+2. **OSC 11** - Requête de couleur de fond terminal (méthode moderne)
+
+Si aucune méthode n'est disponible, le mode `dark` est utilisé par défaut.
 
 ### Gruvbox Dark
-
-| Nom      | Hex       | Usage dans le thème                        |
-|----------|-----------|--------------------------------------------|
-| bg0      | `#282828` | Fond global, texte des éléments hover      |
-| bg1      | `#3c3836` | Onglets inactifs, fond status bar          |
-| bg2      | `#504945` | Sélections                                 |
-| bg3      | `#665c54` | Bordures                                   |
-| bg4      | `#7c6f64` | Éléments inactifs                          |
-| fg1      | `#ebdbb2` | Texte principal, fichiers texte            |
-| red      | `#fb4934` | Mots-clés, archives, fichiers coupés       |
-| green    | `#b8bb26` | Mode normal, exécutables, copie            |
-| yellow   | `#fabd2f` | Hover, onglet actif, input, titres         |
-| blue     | `#83a598` | CWD, fonctions, clés TOML                  |
-| aqua     | `#8ec07c` | Liens symboliques, permission exec         |
-| orange   | `#fe8019` | Vidéo/audio, regex, gras markdown          |
-| purple   | `#d3869b` | Images, constantes, fichiers marqués       |
-| gray     | `#928374` | Commentaires, permissions spéciaux         |
+Thème sombre basé sur la palette Gruvbox, idéal pour une utilisation prolongée.
+- Couleur active : Jaune (#fabd2f)
+- Couleur CWD : Bleu (#83a598)
+- Marqueurs : Vert (copie), Rouge (coupe), Violet (marqué)
 
 ### Gruvbox Light
+Variante claire du thème Gruvbox avec des couleurs adaptées.
+- Palette inversée pour une meilleure lisibilité en mode clair
 
-| Nom      | Hex       | Équivalent dark                            |
-|----------|-----------|--------------------------------------------|
-| bg0      | `#fbf1c7` | `#282828`                                  |
-| bg1      | `#ebdbb2` | `#3c3836`                                  |
-| bg2      | `#d5c4a1` | `#504945`                                  |
-| bg3      | `#bdae93` | `#665c54`                                  |
-| fg1      | `#3c3836` | `#ebdbb2`                                  |
-| red      | `#9d0006` | `#fb4934`                                  |
-| green    | `#79740e` | `#b8bb26`                                  |
-| yellow   | `#b57614` | `#fabd2f`                                  |
-| blue     | `#076678` | `#83a598`                                  |
-| aqua     | `#427b58` | `#8ec07c`                                  |
-| orange   | `#af3a03` | `#fe8019`                                  |
-| purple   | `#8f3f71` | `#d3869b`                                  |
-| gray     | `#928374` | `#928374` (identique)                      |
+### Personnalisation
+Le `theme.toml` peut surcharger n'importe quelle valeur d'un flavor sans modifier les fichiers du flavor :
 
----
+```toml
+[flavor]
+dark  = "gruvbox-dark"
+light = "gruvbox-light"
 
-## Fichiers du flavor — référence rapide
+# Surcharges personnelles
+[manager]
+cwd = { fg = "#fabd2f", bold = true }
+border_style = { fg = "#928374" }
+```
 
-### `flavor.toml` — sections disponibles
+## 📦 Installation
 
-| Section        | Contrôle                                          |
-|----------------|---------------------------------------------------|
-| `[manager]`    | Liste de fichiers, onglets, marqueurs, bordures   |
-| `[mode]`       | Indicateur de mode en bas à gauche                |
-| `[status]`     | Barre de statut, permissions, progression         |
-| `[input]`      | Champ de saisie (renommage, recherche…)           |
-| `[select]`     | Menu de sélection                                 |
-| `[completion]` | Autocomplétion de la command palette              |
-| `[tasks]`      | Panneau des tâches en cours                       |
-| `[spot]`       | Popup d'info rapide                               |
-| `[notify]`     | Notifications (info / warn / error)               |
-| `[help]`       | Panneau d'aide (`~` par défaut)                   |
-| `[filetype]`   | Couleur par type MIME ou attribut fichier         |
-
-### `tmtheme.xml` — coloration syntaxique
-
-Utilisé pour les previews de fichiers de code dans le panel de droite.
-Format compatible **TextMate / Sublime Text / Syntect**.
-
-Les scopes couverts : commentaires, strings, nombres, mots-clés, opérateurs,
-types, fonctions, variables, constantes, balises HTML/XML, regex, Markdown
-(titres, gras, italique, liens, code inline), TOML/JSON/YAML, erreurs.
-
----
-
-## Mise à jour
-
-Pour mettre à jour un flavor sans perdre tes overrides :
+### 1. Installation de Yazi
 
 ```bash
-# Remplacer le dossier du flavor (tes overrides sont dans theme.toml, pas ici)
-cp -r gruvbox-dark.yazi ~/.config/yazi/flavors/
-cp -r gruvbox-light.yazi ~/.config/yazi/flavors/
-# theme.toml n'est pas touché → tes personnalisations sont conservées
+# Avec Cargo
+cargo install --git https://github.com/yazi-rs/yazi --locked
+
+# Avec Homebrew (macOS)
+brew install yazi
+
+# Avec Pacman (Arch Linux)
+yay -S yazi-bin  # ou yazi-git
+```
+
+### 2. Installation de la configuration
+
+```bash
+# Créer le répertoire de configuration
+mkdir -p ~/.config/yazi
+
+# Copier les fichiers de configuration
+cp -r yazi/.config/yazi/* ~/.config/yazi/
+
+# Ou créer des liens symboliques
+ln -sf ~/Desktop/Github/dotfiles/yazi/.config/yazi/yazi.toml ~/.config/yazi/yazi.toml
+ln -sf ~/Desktop/Github/dotfiles/yazi/.config/yazi/keymap.toml ~/.config/yazi/keymap.toml
+ln -sf ~/Desktop/Github/dotfiles/yazi/.config/yazi/theme.toml ~/.config/yazi/theme.toml
+ln -sf ~/Desktop/Github/dotfiles/yazi/.config/yazi/flavors ~/.config/yazi/flavors
+```
+
+### 3. Dépendances optionnelles
+
+Pour profiter pleinement de toutes les fonctionnalités :
+
+```bash
+# Prévisualisation Markdown
+cargo install glow
+
+# Recherche de fichiers
+cargo install fd-find
+
+# Recherche dans le contenu
+cargo install ripgrep
+
+# Navigation intelligente
+cargo install zoxide
+
+# Extraction d'archives
+brew install unar  # macOS
+sudo apt install unar  # Debian/Ubuntu
+
+# Visualisation d'images
+brew install feh sxiv imv  # ou selon votre distribution
+
+# Lecteurs multimédias
+brew install mpv vlc  # ou selon votre distribution
+
+# Lecteurs PDF
+brew install zathura  # ou selon votre distribution
+```
+
+## 🔧 Personnalisation
+
+### Modifier les raccourcis
+Éditez `keymap.toml` et ajoutez vos raccourcis dans la section appropriée :
+
+```toml
+[manager]
+prepend_keymap = [
+    { on = ["<votre-touche>"], run = "votre-commande", desc = "Description" },
+]
+```
+
+### Ajouter des applications d'ouverture
+Éditez `yazi.toml` dans la section `[opener]` :
+
+```toml
+[opener]
+image = [
+    { run = 'votre-app "$@"', orphan = true, desc = "Votre app" },
+]
+```
+
+### Personnaliser la prévisualisation
+Modifiez les paramètres dans `yazi.toml` sous `[preview]` :
+
+```toml
+[preview]
+max_width = 800
+max_height = 1200
+image_quality = 90
+```
+
+## 📚 Ressources
+
+- [Documentation officielle de Yazi](https://yazi-rs.github.io/)
+- [Configuration des thèmes](https://yazi-rs.github.io/docs/configuration/theme)
+- [Raccourcis clavier](https://yazi-rs.github.io/docs/keybindings)
+- [Flavors officiels](https://github.com/yazi-rs/flavors)
+- [Plugins Yazi](https://github.com/yazi-rs/awesome-yazi)
+
+## 🐛 Dépannage
+
+### Problèmes courants
+
+1. **Thème non appliqué** : Vérifiez que les flavors sont dans `~/.config/yazi/flavors/`
+2. **Prévisualisation ne fonctionne pas** : Installez les dépendances requises (glow, etc.)
+3. **Applications ne s'ouvrent pas** : Vérifiez que les applications sont installées et dans le PATH
+4. **Raccourcis ne fonctionnent pas** : Rechargez Yazi ou vérifiez la syntaxe dans `keymap.toml`
+
+### Vérification de la configuration
+
+```bash
+# Vérifier que Yazi charge la configuration
+yazi --help
+
+# Vérifier les chemins de configuration
+yazi --config-dir
 ```
 
 ---
 
-## Ressources
-
-- [Documentation des thèmes Yazi](https://yazi-rs.github.io/docs/configuration/theme)
-- [Flavors officiels](https://github.com/yazi-rs/flavors)
-- [Palette Gruvbox originale](https://github.com/morhetz/gruvbox)
+*Mise à jour : Février 2026*

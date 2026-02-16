@@ -9,14 +9,22 @@ alacritty/
 ├── alacritty.toml          # Configuration principale
 ├── colors.toml             # Thème de couleurs actuel (Everforest)
 ├── fonts.toml              # Configuration des polices
+├── themes/                 # Thèmes additionnels
+│   └── noctalia.toml       # Thème Noctalia (Gruvbox)
 ├── colorschemes/           # Collection de thèmes
 │   ├── Gruvbox_dark.yml
 │   ├── Gruvbox_light.yml
+│   ├── Gruvbox_material.yml
 │   ├── gruvbox.yml
+│   ├── gruvbox_powerline.yml
+│   ├── dwm_gruvbox.yml
 │   ├── dracula.yml
 │   ├── nord.yml
 │   ├── catppuccin.yml
 │   ├── tokyonight.yml
+│   ├── Tokyo_night_storm.yml
+│   ├── everforest.yml
+│   ├── tomorrow-night.yml
 │   └── ...
 └── README.md               # Documentation
 ```
@@ -48,13 +56,18 @@ white   = "#d3c6aa"   # Crème
 ## ⚙️ Configuration principale
 
 ### Curseur
-- `shape = "Beam"` - Curseur fin vertical
+- `style = "Underline"` - Curseur souligné
 - `blinking = "On"` - Clignotement activé
-- `unfocused_hollow = false` - Curseur plein même sans focus
+- `unfocused_hollow = true` - Curseur creux quand la fenêtre n'a pas le focus
+- `thickness = 0.15` - Épaisseur du curseur
+- `vi_mode_style = "None"` - Pas de style spécial en mode Vi
 
 ### Fenêtre
-- `decorations = "none"` - Mode bordless/minimaliste
+- `decorations = "full"` - Barre de titre complète activée
+- `decorations_theme_variant = "Dark"` - Variante sombre des décorations
+- `dynamic_padding = true` - Padding dynamique selon la taille de la fenêtre
 - `opacity = 0.8` - Transparence 80%
+- `startup_mode = "Windowed"` - Mode fenêtré au démarrage
 - `dimensions = 120x30` - Taille par défaut
 - `padding = 19x19` - Marges confortables
 - `dynamic_title = true` - Titre dynamique
@@ -65,8 +78,16 @@ white   = "#d3c6aa"   # Crème
 - `multiplier = 3` - Buffer multiplié par 3
 
 ### Environnement
-- `TERM = "alacritty"` - Terminal correctement détecté
+- `TERM = "xterm-256color"` - Compatibilité avec les applications nécessitant xterm
 - `WINIT_X11_SCALE_FACTOR = "1.0"` - Échelle X11 fixe
+
+### Sélection
+- `save_to_clipboard = true` - Sauvegarde automatique dans le presse-papiers
+- `semantic_escape_chars` - Caractères d'échappement sémantiques configurés
+
+### Souris
+- `hide_when_typing = true` - Cache la souris pendant la frappe
+- `Middle click = PasteSelection` - Clic molette pour coller la sélection
 
 ## 🔤 Police
 
@@ -84,9 +105,19 @@ white   = "#d3c6aa"   # Crème
 - **Catppuccin** - Thème pastel moderne
 
 ### Alternatives
-- **Tokyo Night** - Thème nocturne japonais
+- **Tokyo Night** / **Tokyo Night Storm** - Thème nocturne japonais
 - **Everforest** - Thème vert apaisant (actuel)
 - **Tomorrow Night** - Thème classique
+- **Noctalia** (dans `themes/`) - Variante Gruvbox en format TOML
+
+### Thèmes Gruvbox
+Plusieurs variantes Gruvbox sont disponibles :
+- `Gruvbox_dark.yml` - Version sombre classique
+- `Gruvbox_light.yml` - Version claire
+- `Gruvbox_material.yml` - Version Material Design
+- `gruvbox.yml` - Version standard
+- `gruvbox_powerline.yml` - Optimisé pour Powerline
+- `dwm_gruvbox.yml` - Optimisé pour dwm
 
 ## 🚀 Installation
 
@@ -108,12 +139,15 @@ white   = "#d3c6aa"   # Crème
 1. **Éditer** `alacritty.toml` et modifier la ligne `import` :
    ```toml
    import = [
-       "~/.config/alacritty/colorschemes/Gruvbox_dark.yml",
+       "~/.config/alacritty/colors.toml",  # Thème principal
        "~/.config/alacritty/fonts.toml",
+       #"~/.config/alacritty/themes/noctalia.toml"  # Décommenter pour activer
    ]
    ```
 
 2. **Ou remplacer** le contenu de `colors.toml` par un thème des `colorschemes/`
+
+3. **Ou utiliser** un thème du dossier `themes/` en le décommentant dans les imports
 
 ### Créer un nouveau thème
 1. **Copier** un thème existant :
@@ -128,13 +162,27 @@ white   = "#d3c6aa"   # Crème
 ### Rechargement automatique
 La configuration se recharge automatiquement grâce à `live_config_reload = true`. Il suffit de sauvegarder les fichiers pour voir les changements.
 
-## ⌨️ Raccourcis
+## ⌨️ Raccourcis Clavier
 
-### Plein écran
-- `F11` - Basculer en plein écran
+### Copier/Coller
+- `Ctrl+Shift+C` - Copier la sélection
+- `Ctrl+Shift+V` - Coller
+- `Ctrl+Shift+F` - Rechercher vers l'avant
+- `Ctrl+Shift+B` - Rechercher vers l'arrière
 
-### Navigation
-- Les raccourcis standards du terminal fonctionnent nativement
+### Navigation dans l'historique
+- `Shift+PageUp` - Défiler une page vers le haut
+- `Shift+PageDown` - Défiler une page vers le bas
+- `Shift+Home` - Aller en haut de l'historique
+- `Shift+End` - Aller en bas de l'historique
+
+### Autres
+- `Ctrl+L` - Effacer les notifications de log
+- `Ctrl+0` - Réinitialiser la taille de la police
+- `F11` - Basculer en plein écran (raccourci système)
+
+### Mode Vi
+- `Ctrl+Shift+C` - Effacer la sélection en mode Vi
 
 ## 🔧 Personnalisation
 
@@ -144,6 +192,16 @@ La configuration se recharge automatiquement grâce à `live_config_reload = tru
 opacity = 0.9  # Plus transparent
 opacity = 0.7  # Moins transparent
 opacity = 1.0  # Opaque
+opacity = 0.8  # Actuel
+```
+
+### Modifier les décorations
+```toml
+[window]
+decorations = "full"              # Barre de titre complète (actuel)
+decorations = "none"              # Mode bordless
+decorations_theme_variant = "Dark"  # Variante sombre
+decorations_theme_variant = "Light" # Variante claire
 ```
 
 ### Modifier la taille de police
@@ -163,10 +221,12 @@ y = 8   # Marges verticales
 
 ### Changer le curseur
 ```toml
-[cursor.style]
-shape = "Block"    # Carré
-shape = "Underline" # Souligné
-shape = "Beam"     # Vertical (actuel)
+[cursor]
+style = "Block"      # Carré
+style = "Underline"  # Souligné (actuel)
+style = "Beam"       # Vertical
+thickness = 0.15     # Épaisseur (0.0 à 1.0)
+unfocused_hollow = true  # Creux quand sans focus
 ```
 
 ## 🐛 Dépannage
@@ -198,4 +258,4 @@ shape = "Beam"     # Vertical (actuel)
 
 ---
 
-**Dernière mise à jour**: 2026-02-11
+**Dernière mise à jour**: 2026-02-16
