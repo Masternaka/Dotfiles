@@ -159,6 +159,11 @@ binds {
     Mod+T                               { toggle-window-floating; }
     Mod+W                               { toggle-column-tabbed-display; }
 
+    // ─── Windows Switcher ───
+    Alt+Tab         { next-window; }
+    Alt+Shift+Tab   { previous-window; }
+    Alt+grave       { next-window     filter="app-id"; }
+    Alt+Shift+grave { previous-window filter="app-id"; }
 
     // ─── Screenshots ───
     CTRL+Shift+1                        { screenshot; }
