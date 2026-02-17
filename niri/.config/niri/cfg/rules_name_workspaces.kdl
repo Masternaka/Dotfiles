@@ -1,0 +1,14 @@
+ window-rule {
+     match at-startup=true app-id="^firefox$"
+     open-on-workspace "browser"
+ }
+
+ window-rule {
+     match at-startup=true app-id="^discord$"
+     open-on-workspace "chat"
+ }
+
+ window-rule {
+     match at-startup=true app-id="^obsidian$"
+     open-on-workspace "notes"
+ }

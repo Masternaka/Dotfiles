@@ -1,6 +1,8 @@
     layout {
         gaps 16 // Gap between windows
-        center-focused-column "always" // The focused column is always centered
+        center-focused-column "never" // The focused column is always centered, option are "always", "never", "on-overflow"
+        always-center-single-column
+        default-column-display "normal" // Sets the default display mode for new columns, option are "normal", "tabbed"
 
         background-color "transparent" // <- needed for noctalia-shell to set wallpaper
 
@@ -18,4 +20,12 @@
             // top 64
             // bottom 64
         }
+
+        //tab-indicator {
+        //        width 8
+        //        gap 8
+        //        length total-proportion=1.0
+        //        position "top"
+        //        place-within-column
+        //}
     }

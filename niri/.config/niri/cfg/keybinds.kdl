@@ -10,13 +10,15 @@ binds {
 
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
-    Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    //Mod+Return                          hotkey-overlay-title="Open Terminal: Kitty" { spawn "kitty"; }
+    Mod+Shift+Space                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
     Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Mod+Shift+Q                        hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-
-    // Please choose your own file manager.
-    Mod+Shift+Return                               hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
+    Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Mod+Shift+Return                    hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
+    //Mod+Shift+Return                    hotkey-overlay-title="File Manager: Thunar" { spawn "thunar"; }
+    //Mod+Shift+Return                    hotkey-overlay-title="File Manager: Yazi" { spawn "yazi"; }
+    Mod+F11                           hotkey-overlay-title="Open Dropdown Terminal: kitty" { spawn "kitten" "quick-access-terminal"; }
 
     // ─── Media Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
@@ -112,6 +114,19 @@ binds {
     Mod+7                               { focus-workspace 7; }
     Mod+8                               { focus-workspace 8; }
     Mod+9                               { focus-workspace 9; }
+    Mod+10                              { focus-workspace 10; }
+
+    // Focus workspace by name, use it only with the workspaces config file enable
+    //Mod+1                               { focus-workspace "web"; }
+    //Mod+2                               { focus-workspace "code"; }
+    //Mod+3                               { focus-workspace "terminal; }
+    //Mod+4                               { focus-workspace "files"; }
+    //Mod+5                               { focus-workspace "music"; }
+    //Mod+6                               { focus-workspace "chat"; }
+    //Mod+7                               { focus-workspace "mail"; }
+    //Mod+8                               { focus-workspace "notes"; }
+    //Mod+9                               { focus-workspace "media"; }
+    //Mod+10                              { focus-workspace "misc"; }
 
     Mod+Shift+1                          { move-column-to-workspace 1; }
     Mod+Shift+2                          { move-column-to-workspace 2; }
@@ -122,6 +137,7 @@ binds {
     Mod+Shift+7                          { move-column-to-workspace 7; }
     Mod+Shift+8                          { move-column-to-workspace 8; }
     Mod+Shift+9                          { move-column-to-workspace 9; }
+    Mod+Shift+10                         { move-column-to-workspace 10; }
 
     Mod+TAB                             { focus-workspace-previous; }
 
