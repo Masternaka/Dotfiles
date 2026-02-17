@@ -1,3 +1,8 @@
+// This is the miscellaneous configuration file for Niri. It contains various settings that don't fit into the other categories, such as environment variables, debug options, and other miscellaneous preferences.
+
+// ────────────── Miscellaneous Settings ──────────────
+
+
     prefer-no-csd
     screenshot-path null
 

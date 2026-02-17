@@ -1,3 +1,5 @@
+// This is the display configuration file for Niri. It defines how your displays are set up, including their resolution, position, and other settings.
+
 // ────────────── Output Configuration ──────────────
 // You can run `niri msg outputs` to get the correct name for your displays.
 // You will have to remove "/-" and edit it before it takes effect.

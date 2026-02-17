@@ -1,3 +1,5 @@
+// This is the autostart configuration file for Niri. It defines applications and commands that should be run automatically when Niri starts up.
+
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 

@@ -1,3 +1,5 @@
+// This is the keybindings configuration file for Niri. It defines the keyboard shortcuts that you can use to control various aspects of the window manager and your system. You can customize these keybindings to suit your preferences and workflow.
+
 binds {
 
     // ────────────── Keybindings ──────────────

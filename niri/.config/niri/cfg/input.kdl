@@ -1,3 +1,5 @@
+// This is the input configuration file for Niri. It defines how your input devices (keyboard, touchpad, mouse, etc.) are configured and behave in the system.
+
 // ────────────── Input Configuration ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 

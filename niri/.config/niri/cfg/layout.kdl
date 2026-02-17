@@ -1,3 +1,7 @@
+// This is the layout configuration file for Niri. It defines how windows are arranged and displayed on your screen, including gaps, column behavior, and other layout-related settings.
+
+// ────────────── Layout Settings ──────────────
+
     layout {
         gaps 16 // Gap between windows
         center-focused-column "never" // The focused column is always centered, option are "always", "never", "on-overflow"

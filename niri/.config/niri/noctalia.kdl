@@ -1,3 +1,7 @@
+// This is the main configuration file for Noctalia inside on Niri. This file defines the color scheme for the Noctalia theme.
+
+// ────────────── Noctalia color scheme ──────────────
+
 layout {
 
     focus-ring {

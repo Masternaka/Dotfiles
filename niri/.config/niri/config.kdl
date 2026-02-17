@@ -1,3 +1,7 @@
+// This is the main configuration file for Niri. It includes various other configuration files that define different aspects of the window manager, such as animations, autostart applications, keybindings, input settings, display settings, layout preferences, window rules, miscellaneous settings, and workspace definitions. You can customize each of these included files to tailor Niri to your preferences and workflow.
+
+// ────────────── Niri main configuration ──────────────
+
 include "./cfg/autostart.kdl"
 include "./cfg/keybinds.kdl"
 include "./cfg/input.kdl"

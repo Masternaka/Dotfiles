@@ -1,4 +1,6 @@
-// Define specific workspaces on specific monitor
+// This is the workspaces configuration file for Niri. It defines the workspaces that you have in your system, how they are named, and which monitor they should open on. You can customize this file to create a workspace setup that suits your workflow and preferences.
+
+// ────────────── Workspaces outputs ──────────────
 
 workspace "1" { open-on-output "DP-1"; }
 workspace "2" { open-on-output "DP-1"; }

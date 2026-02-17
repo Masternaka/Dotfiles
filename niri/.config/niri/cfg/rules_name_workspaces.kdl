@@ -1,3 +1,7 @@
+// This is the window rules for name workspaces configuration file for Niri. It defines rules for how specific applications should be handled when they are opened, such as which workspace they should open on, whether they should be floating or tiled, and other behavior related to window management.
+
+// ────────────── Workspaces specific names and rules ──────────────
+
  window-rule {
      match at-startup=true app-id="^firefox$"
      open-on-workspace "browser"
