@@ -101,4 +101,160 @@ Chaque fichier peut être modifié indépendamment pour adapter l'environnement 
 
 ## Keybindings
 
-Voir le fichier `niri-keybindings.md` pour les raccourcis clavier disponibles.
+Guide de référence complet de tous les raccourcis clavier dans le gestionnaire de fenêtres Niri.
+
+**💡 Note :** `Mod` = touche `Super` (touche Windows)
+
+---
+
+## Contrôles Système
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Shift+ESCAPE` | Afficher la superposition des raccourcis |
+| `Mod+ESCAPE` | Basculer l'inhibition des raccourcis |
+| `CTRL+ALT+Delete` | Quitter Niri |
+| `Mod+Shift+P` | Éteindre les moniteurs |
+
+---
+
+## Applications
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Return` | Ouvrir le terminal (Alacritty) |
+| `Mod+Shift+Space` | Ouvrir le lanceur d'applications (Noctalia) |
+| `Mod+B` | Ouvrir le navigateur (Firefox) |
+| `Mod+ALT+L` | Verrouiller l'écran |
+| `Mod+Shift+Q` | Menu de session |
+| `Mod+Shift+Return` | Gestionnaire de fichiers (Nautilus) |
+| `Mod+F11` | Terminal déroulant (Kitty) |
+
+---
+
+## Mouvement et Focus des Fenêtres
+
+### Mouvement du Focus
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Left` / `Mod+H` | Focuser la colonne à gauche |
+| `Mod+Right` / `Mod+L` | Focuser la colonne à droite |
+| `Mod+Up` / `Mod+K` | Focuser la fenêtre au-dessus |
+| `Mod+Down` / `Mod+J` | Focuser la fenêtre au-dessous |
+| `Mod+Home` | Focuser la première colonne |
+| `Mod+End` | Focuser la dernière colonne |
+
+### Mouvement des Fenêtres
+
+| Touche | Action |
+|-----|--------|
+| `Mod+CTRL+Left` / `Mod+CTRL+H` | Déplacer la colonne à gauche |
+| `Mod+CTRL+Right` / `Mod+CTRL+L` | Déplacer la colonne à droite |
+| `Mod+CTRL+Up` / `Mod+CTRL+K` | Déplacer la fenêtre vers le haut |
+| `Mod+CTRL+Down` / `Mod+CTRL+J` | Déplacer la fenêtre vers le bas |
+| `Mod+CTRL+Home` | Déplacer la colonne au début |
+| `Mod+CTRL+End` | Déplacer la colonne à la fin |
+
+### Navigation entre Moniteurs
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Shift+Left` / `Mod+Shift+H` | Focuser le moniteur à gauche |
+| `Mod+Shift+Right` / `Mod+Shift+L` | Focuser le moniteur à droite |
+| `Mod+Shift+Up` / `Mod+Shift+K` | Focuser le moniteur au-dessus |
+| `Mod+Shift+Down` / `Mod+Shift+J` | Focuser le moniteur au-dessous |
+
+### Déplacer entre Moniteurs
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Shift+CTRL+Left` / `Mod+Shift+CTRL+H` | Déplacer la colonne au moniteur à gauche |
+| `Mod+Shift+CTRL+Right` / `Mod+Shift+CTRL+L` | Déplacer la colonne au moniteur à droite |
+| `Mod+Shift+CTRL+Up` / `Mod+Shift+CTRL+K` | Déplacer la colonne au moniteur au-dessus |
+| `Mod+Shift+CTRL+Down` / `Mod+Shift+CTRL+J` | Déplacer la colonne au moniteur au-dessous |
+
+---
+
+## Commutation d'Espaces de Travail
+
+### Navigation à la Roulette Souris
+
+| Touche | Action |
+|-----|--------|
+| `Mod+WheelScrollDown` | Focuser l'espace de travail en bas |
+| `Mod+WheelScrollUp` | Focuser l'espace de travail en haut |
+| `Mod+CTRL+WheelScrollDown` | Déplacer la colonne vers l'espace de travail en bas |
+| `Mod+CTRL+WheelScrollUp` | Déplacer la colonne vers l'espace de travail en haut |
+| `Mod+WheelScrollRight` | Focuser la colonne à droite |
+| `Mod+WheelScrollLeft` | Focuser la colonne à gauche |
+| `Mod+CTRL+WheelScrollRight` | Déplacer la colonne à droite |
+| `Mod+CTRL+WheelScrollLeft` | Déplacer la colonne à gauche |
+
+**Délai de 150ms** pour éviter le défilement excessif
+
+### Espaces de Travail Numérotés
+
+| Touche | Action |
+|-----|--------|
+| `Mod+1` à `Mod+10` | Focuser l'espace de travail 1-10 |
+| `Mod+Shift+1` à `Mod+Shift+10` | Déplacer la colonne vers l'espace de travail 1-10 |
+| `Mod+TAB` | Focuser l'espace de travail précédent |
+
+---
+
+## Contrôles de Disposition
+
+| Touche | Action |
+|-----|--------|
+| `Mod+CTRL+F` | Étendre la colonne à la largeur disponible |
+| `Mod+C` | Centrer la colonne |
+| `Mod+CTRL+C` | Centrer les colonnes visibles |
+| `Mod+Minus` | Réduire la largeur de la colonne (-10%) |
+| `Mod+Equal` | Augmenter la largeur de la colonne (+10%) |
+| `Mod+Shift+Minus` | Réduire la hauteur de la fenêtre (-10%) |
+| `Mod+Shift+Equal` | Augmenter la hauteur de la fenêtre (+10%) |
+
+---
+
+## Modes de Fenêtre
+
+| Touche | Action |
+|-----|--------|
+| `Mod+R` | Cycler dans les présets de largeur |
+| `Mod+F` | Maximiser la colonne |
+| `Mod+Shift+F` | Basculer le plein écran |
+| `Mod+T` | Basculer le mode flottant |
+| `Mod+W` | Basculer l'affichage en onglets |
+| `Mod+O` | Basculer l'aperçu |
+
+---
+
+## Commutateur de Fenêtres
+
+| Touche | Action |
+|-----|--------|
+| `Alt+Tab` | Fenêtre suivante |
+| `Alt+Shift+Tab` | Fenêtre précédente |
+| `Alt+grave` | Fenêtre suivante (même app) |
+| `Alt+Shift+grave` | Fenêtre précédente (même app) |
+
+---
+
+## Captures d'Écran
+
+| Touche | Action |
+|-----|--------|
+| `CTRL+Shift+1` | Capture d'écran (sélection) |
+| `CTRL+Shift+2` | Capture d'écran (écran) |
+| `CTRL+Shift+3` | Capture d'écran (fenêtre) |
+
+---
+
+## Gestion des Fenêtres
+
+| Touche | Action |
+|-----|--------|
+| `Mod+Q` | Fermer la fenêtre |
+
+---
